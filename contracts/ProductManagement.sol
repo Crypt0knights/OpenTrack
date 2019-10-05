@@ -81,10 +81,10 @@ function buildProduct(string memory serial_num, string memory product_type, stri
 
     products[product_hash] = new_product;
     return product_hash;
+}
 
-        
-
-    
-
+function getParts(bytes32 product_hash) public returns (bytes32[6] memory){
+    require(products[product_hash].manufacturer != address(0), "Product inexistent");//ternary operator
+    return products[product_hash].parts;
 }
 
