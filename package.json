@@ -1,0 +1,19 @@
+{
+  "name": "opentrack",
+  "version": "1.0.0",
+  "description": "A Blockchain and ML based smart contract",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidntrivedi012/OpenTrack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sidntrivedi012/OpenTrack/issues"
+  },
+  "homepage": "https://github.com/sidntrivedi012/OpenTrack#readme"
+}
