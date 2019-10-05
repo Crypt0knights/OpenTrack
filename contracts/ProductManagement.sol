@@ -65,4 +65,26 @@ function buildPart(string memory serial_num,string memory part_type, string memo
     return part_hash;
 }
 
+function buildProduct(string memory serial_num, string memory product_type, string memory creation_date, bytes32[6] memory part_array) public returns(bytes32){
+    //to check if all parts exist.
+    uint i;
+    for(i = 0;i < part_array.length; i++){
+        require(parts[part_array[i]].manufacturer != address(0), "This part doesn't exist.");
+    }
+
+    //Create hash for data and check if exists. If it doesn't, create the part and return the ID to the user.
+    bytes32 product_hash = concatenateInfoAndHash(msg.sender, serial_num, product_type, creation_date);//msg.sender  = sender of the current call.
+
+    require(products[product_hash].manufacturer == address(0), "Product ID already used");
+
+    Product memory new_product = Product(msg.sender, serial_number, product_type, creation_date, part_array);
+
+    products[product_hash] = new_product;
+    return product_hash;
+
+        
+
+    
+
+}
 
