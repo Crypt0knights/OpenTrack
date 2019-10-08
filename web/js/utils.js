@@ -188,16 +188,11 @@ function getMultipleActivePart() {
 
 async function init_web3() {
     //Web3 init
-    if (typeof web3 != 'undefined') {
-        web3 = new Web3(web3.currentProvider) // what Metamask injected 
-    } else {
-        // Instantiate and set Ganache as your provider
-        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-    }
+   
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));        
+    
     //Load accounts
     window.accounts = await web3.eth.getAccounts()
-    console.log(window.accounts);
-    
     console.log("Loaded accounts")
 
     // The interface definition for your smart contract (the ABI) 

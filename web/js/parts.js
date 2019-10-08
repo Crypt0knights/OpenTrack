@@ -22,9 +22,6 @@ window.onload = async function() {
     console.log(
       "Serial: " + serial + " Date:" + creation_date + "Part Type: " + part_type
     );
-    console.log(window.accounts[0]);
-    var address = web3.eth.accounts[0];
-    console.log(address);
 
     //Create part hash and send information to blockchain
     var part_sha = web3.utils.soliditySha3(
@@ -33,7 +30,6 @@ window.onload = async function() {
       web3.utils.fromAscii(part_type),
       web3.utils.fromAscii(creation_date)
     );
-    console.log("SHA done");
 
     window.pm.methods
       .buildPart(serial, part_type, creation_date)
