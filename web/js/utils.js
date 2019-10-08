@@ -196,6 +196,8 @@ async function init_web3() {
     }
     //Load accounts
     window.accounts = await web3.eth.getAccounts()
+    console.log(window.accounts);
+    
     console.log("Loaded accounts")
 
     // The interface definition for your smart contract (the ABI) 
