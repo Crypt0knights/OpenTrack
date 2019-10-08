@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supply Chain Demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.33/dist/web3.min.js"></script>
+    <script type="module" src="./js/dealer.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="teal">
+        <div class="nav-wrapper">
+          <!-- <a href="#" class="brand-logo right">Logo</a> -->
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="index.html">Parts Factory</a></li>
+            <li><a href="car_factory.html">Car Factory</a></li>
+            <li><a href="dealer.html">Dealer</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="col s6">
+          <h2>Dealer</h2>
+          <label>Address: </label>
+          <p id="dealer-address">0xa71BFEA3b624C3020114dD8E55417292D987ECD2</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <div id="car-history" class="collection with-header">
+            <p class="collection-header">Cars History</p>
+          </div>
+          <div id="car-details">
+            <label>Owner History: </label>
+            <p id="car-owners"></p>
+          </div>
+        </div>
+        <div class="col s6">
+          <div id="parts-history" class="collection with-header">
+            <p class="collection-header">Parts History</p>
+          </div>
+          <div id="parts-details">
+            <label>Owner History: </label>
+            <p id="part-owners"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
