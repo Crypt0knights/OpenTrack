@@ -23,6 +23,6 @@ http-server <foldername i.e web>
 ```
 and visit the browser on the port ```localhost:8080```.
 
-Now you can perform various tasks like from building parts and products to changing ownerships. 
+Now you can perform various tasks like from building parts and products to their changing ownerships. 
 
-Note: Build car by clicking on 6 parts and filing the serial number of the car.
+Note: Build car by clicking on 6 parts and filling the serial number of the car.
