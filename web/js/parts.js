@@ -9,7 +9,7 @@ import {
 } from "./utils.js";
 
 window.onload = async function() {
-  var x = await init_web3();
+  var x = await init_web3(); //calling init function in util
 
   document.getElementById("build-part").addEventListener("click", function() {
     console.log("Create Part");

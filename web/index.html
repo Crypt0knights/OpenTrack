@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.33/dist/web3.min.js"></script>
     <script src="./js/parts.js" type="module"></script>
+    <script src="./js/utils.js" type="module"></script>
   </head>
 
   <body>
@@ -30,7 +31,7 @@
         <div class="col s6">
           <label>Address: </label>
           <p id="part-factory-address">
-            0x01fF05d15B9801ED4AFb95bbeD803f725B7eD78B
+            0x6C35B338b9641D525B709306730747C046f920E9
           </p>
         </div>
       </div>
@@ -69,6 +70,8 @@
             <p id="details-part-type"></p>
             <label>Creation Date:</label>
             <p id="details-creation-date"></p>
+            <label>Creation Location :</label>
+            <a id="map-link" target="_blank"></a>
             <input
               id="part-change-ownership-input"
               type="text"
