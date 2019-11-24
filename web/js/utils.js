@@ -21,6 +21,8 @@ function populateDetails(item) {
   console.log("Populate details, get info from chain");
   console.log(item);
   //Query blockchain for data to fill element
+  console.log(window.accounts[0]);
+
   window.pm.methods
     .parts(item)
     .call({ from: window.accounts[0] }, function(error, part_info) {
@@ -36,6 +38,7 @@ function populateDetails(item) {
           part_info["part_type"];
         document.getElementById("details-creation-date").textContent =
           part_info["creation_date"];
+        getLocation();
 
         //Check if the part is already registered, and do it otherwise
         window.co.methods
@@ -392,8 +395,7 @@ async function init_web3() {
     }
   ]);
 
-  window.pm.options.address = "0x2c1Aa48dc7B54F045C8828c7c22F91316078E7D2";
-
+  window.pm.options.address = "0x38f1b2f36F6144bAB88AEAc327f551EFc0d8cC58";
   window.co = new web3.eth.Contract([
     {
       constant: true,
@@ -538,7 +540,7 @@ async function init_web3() {
       signature: "0xac814490"
     }
   ]);
-  window.co.options.address = "0xfae020a22821E169D50A43aCc7a61C27aCcB9932";
+  window.co.options.address = "0x11c919A730371f91610C4DFB6761C89Fe75D7803";
 }
 
 async function getOwnerHistoryFromEvents(event, p_hash) {
@@ -618,6 +620,37 @@ function dealerProductListManager() {
   }
 }
 
+function getLocation(mapLink) {
+  function success(pos) {
+    const mapLink = document.querySelector("#map-link");
+    var crd = pos.coords;
+    const latitude = crd.latitude;
+    const longitude = crd.longitude;
+    const accuracy = crd.accuracy;
+    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+  }
+
+  function error(err) {
+    console.log("error");
+
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  if (!navigator.geolocation) {
+    status.textContent = "Geolocation is not supported by your browser";
+  } else {
+    // status.textContent = "Locating…";
+    console.log("locating");
+
+    navigator.geolocation.getCurrentPosition(success, error, {
+      maximumAge: 60000,
+      timeout: 5000,
+      enableHighAccuracy: true
+    });
+  }
+}
+
 export {
   toggleActive,
   clearActiveExcept,
@@ -636,5 +669,6 @@ export {
   getOwnerHistoryFromEvents,
   getOwnedItemsFromEvent,
   dealerPartListManager,
-  dealerProductListManager
+  dealerProductListManager,
+  getLocation
 };

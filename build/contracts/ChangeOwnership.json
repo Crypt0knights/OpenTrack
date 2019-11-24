@@ -8540,10 +8540,139 @@
       "links": {},
       "address": "0xbEFf8e19B3DfeCC0Dc528cFD7A06287A47111523",
       "transactionHash": "0xf9fffd3296fb4887aab1e22f34190b67ef2b1fe006bfb6da90efc91e99ca77fa"
+    },
+    "1574602501782": {
+      "events": {
+        "0x6a67eae68bb9deea9cbb16299fce22702092dc03cbcfd6a7babc7ac0036c7d4b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "p",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "TransferPartOwnership",
+          "type": "event",
+          "signature": "0x6a67eae68bb9deea9cbb16299fce22702092dc03cbcfd6a7babc7ac0036c7d4b"
+        },
+        "0xe2d5b74efaa0dc370d71f08be6bc6c865613194b7345262a998fb5232622c0b2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "p",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "TransferProductOwnership",
+          "type": "event",
+          "signature": "0xe2d5b74efaa0dc370d71f08be6bc6c865613194b7345262a998fb5232622c0b2"
+        }
+      },
+      "links": {},
+      "address": "0x305564087eF1A4039C75C39B1e410d1227F6aDfd",
+      "transactionHash": "0x2f1f709478ae60ffdaf3794a5bdfebe66bdf3a4afe692a1ce30321ebd50de9a5"
+    },
+    "1574604857441": {
+      "events": {
+        "0x6a67eae68bb9deea9cbb16299fce22702092dc03cbcfd6a7babc7ac0036c7d4b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "p",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "TransferPartOwnership",
+          "type": "event",
+          "signature": "0x6a67eae68bb9deea9cbb16299fce22702092dc03cbcfd6a7babc7ac0036c7d4b"
+        },
+        "0xe2d5b74efaa0dc370d71f08be6bc6c865613194b7345262a998fb5232622c0b2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "p",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "TransferProductOwnership",
+          "type": "event",
+          "signature": "0xe2d5b74efaa0dc370d71f08be6bc6c865613194b7345262a998fb5232622c0b2"
+        }
+      },
+      "links": {},
+      "address": "0x11c919A730371f91610C4DFB6761C89Fe75D7803",
+      "transactionHash": "0xe34c1dfe2c8ca7ba78ab823b43f91374be22ec87175c58dd2668f6482727e667"
+    },
+    "1574606097805": {
+      "events": {
+        "0x6a67eae68bb9deea9cbb16299fce22702092dc03cbcfd6a7babc7ac0036c7d4b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "p",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "TransferPartOwnership",
+          "type": "event",
+          "signature": "0x6a67eae68bb9deea9cbb16299fce22702092dc03cbcfd6a7babc7ac0036c7d4b"
+        },
+        "0xe2d5b74efaa0dc370d71f08be6bc6c865613194b7345262a998fb5232622c0b2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "p",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "TransferProductOwnership",
+          "type": "event",
+          "signature": "0xe2d5b74efaa0dc370d71f08be6bc6c865613194b7345262a998fb5232622c0b2"
+        }
+      },
+      "links": {},
+      "address": "0x11c919A730371f91610C4DFB6761C89Fe75D7803",
+      "transactionHash": "0xe34c1dfe2c8ca7ba78ab823b43f91374be22ec87175c58dd2668f6482727e667"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-11-24T12:58:35.241Z",
+  "updatedAt": "2019-11-24T14:35:28.674Z",
   "devdoc": {
     "methods": {}
   },
