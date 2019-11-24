@@ -70,6 +70,7 @@ function populateDetails(item) {
 }
 
 function populateCarDetails(item) {
+  getLocation();
   console.log("Populate Car details, get info from chain");
   console.log(item);
   //Query blockchain for data to fill element
@@ -101,7 +102,6 @@ function populateCarDetails(item) {
               document.getElementById(
                 "car-details-parts"
               ).textContent = parts_str;
-
               //Check if the product is already registered, and do it otherwise
               window.co.methods
                 .currentProductOwner(item)
@@ -620,7 +620,7 @@ function dealerProductListManager() {
   }
 }
 
-function getLocation(mapLink) {
+function getLocation() {
   function success(pos) {
     const mapLink = document.querySelector("#map-link");
     var crd = pos.coords;
