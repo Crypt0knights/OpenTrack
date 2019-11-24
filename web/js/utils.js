@@ -239,6 +239,7 @@ async function init_web3() {
   //Load accounts
   window.accounts = await web3.eth.getAccounts();
   console.log("Loaded accounts");
+  // Is there is an injected web3 instance?
 
   // The interface definition for your smart contract (the ABI)
   window.pm = new web3.eth.Contract([
@@ -395,7 +396,7 @@ async function init_web3() {
     }
   ]);
 
-  window.pm.options.address = "0x38f1b2f36F6144bAB88AEAc327f551EFc0d8cC58";
+  window.pm.options.address = "0xc3EF6c7c2c11EbbEaD4Ffd7ec868C33Da4607843";
   window.co = new web3.eth.Contract([
     {
       constant: true,
@@ -540,7 +541,7 @@ async function init_web3() {
       signature: "0xac814490"
     }
   ]);
-  window.co.options.address = "0x11c919A730371f91610C4DFB6761C89Fe75D7803";
+  window.co.options.address = "0x61bb80357F164c32dfb34181B4ee772b859f17B4";
 }
 
 async function getOwnerHistoryFromEvents(event, p_hash) {
@@ -626,9 +627,28 @@ function getLocation() {
     var crd = pos.coords;
     const latitude = crd.latitude;
     const longitude = crd.longitude;
-    const accuracy = crd.accuracy;
-    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+    const url =
+      "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+      latitude +
+      "&lon=" +
+      longitude;
+    // Make a request for a user with a given ID
+    axios
+      .get(url)
+      .then(function(response) {
+        // handle success
+        const state1 = response.data.address.state;
+        console.log(response.data.address.state);
+        mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+        mapLink.textContent = `${state1}`;
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function() {
+        // always executed
+      });
   }
 
   function error(err) {
