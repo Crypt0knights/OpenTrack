@@ -179,6 +179,9 @@ function carListManager() {
 
 function addItemToList(item, list_name, click_function) {
   console.log("Populate parts");
+  console.log(item);
+  console.log(list_name);
+
   //Receive item hash and add to list with some animations
   var element = document.createElement("a");
   element.textContent = item;
@@ -396,7 +399,7 @@ async function init_web3() {
     }
   ]);
 
-  window.pm.options.address = "0xc3EF6c7c2c11EbbEaD4Ffd7ec868C33Da4607843";
+  window.pm.options.address = "0x11c919A730371f91610C4DFB6761C89Fe75D7803";
   window.co = new web3.eth.Contract([
     {
       constant: true,
@@ -541,7 +544,7 @@ async function init_web3() {
       signature: "0xac814490"
     }
   ]);
-  window.co.options.address = "0x61bb80357F164c32dfb34181B4ee772b859f17B4";
+  window.co.options.address = "0x2C43f0F083Cb6cEe906E1670756BF15236AA3E31";
 }
 
 async function getOwnerHistoryFromEvents(event, p_hash) {

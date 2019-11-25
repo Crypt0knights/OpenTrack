@@ -14,15 +14,17 @@ import {
 window.onload = async function() {
   var x = await init_web3();
 
-  // document.getElementById("register-part").addEventListener("click", function () {
-  //     console.log("Register Received Part")
+  // document
+  //   .getElementById("register-part")
+  //   .addEventListener("click", function() {
+  //     console.log("Register Received Part");
 
-  //     var addr = document.getElementById("part-addr").value
+  //     var addr = document.getElementById("part-addr").value;
 
-  //     if(addr != ""){
-  //         addItemToList(addr, "car-part-list", carPartListManager)
+  //     if (addr != "") {
+  //       addItemToList(addr, "car-part-list", carPartListManager);
   //     }
-  // })
+  //   });
 
   //Get all the parts that belonged to this factory and then check the ones that still do
   var parts = await getOwnedItemsFromEvent(
@@ -36,7 +38,9 @@ window.onload = async function() {
       parts[i]
     );
     console.log(owners);
-    if (owners[owners.length - 1] == window.accounts[0]) {
+    console.log(window.accounts[1]);
+
+    if (owners[owners.length - 1] == window.accounts[1]) {
       addItemToList(parts[i], "car-part-list", carPartListManager);
     }
   }
