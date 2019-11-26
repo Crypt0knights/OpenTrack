@@ -71,7 +71,7 @@ window.onload = async function() {
       //Finally, build the car
       window.pm.methods
         .buildProduct(serial, "Car", creation_date, part_array)
-        .send({ from: window.accounts[0], gas: 2000000 }, function(
+        .send({ from: window.accounts[1], gas: 2000000 }, function(
           error,
           result
         ) {
@@ -81,7 +81,7 @@ window.onload = async function() {
             console.log("Car created");
             //Add hash to car owned list
             var car_sha = web3.utils.soliditySha3(
-              window.accounts[0],
+              window.accounts[1],
               web3.utils.fromAscii(serial),
               web3.utils.fromAscii("Car"),
               web3.utils.fromAscii(creation_date)
@@ -111,7 +111,7 @@ window.onload = async function() {
         if (to_address != "") {
           window.co.methods
             .changeOwnership(1, hash_element.textContent, to_address)
-            .send({ from: window.accounts[0], gas: 100000 }, function(
+            .send({ from: window.accounts[1], gas: 100000 }, function(
               error,
               result
             ) {
