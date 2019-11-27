@@ -1,66 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>OpenTrackForecasting</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="highlight.css">
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-<link
+  <head>
+    <title>OpenTrackForecasting</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="highlight.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
 
-<style type="text/css">
-  body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+    <style type="text/css">
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
 
-  svg {
-    background: #f7f7f7;
-  }
+      svg {
+        background: #f7f7f7;
+      }
 
-  #india {
-    /*    fill: #00BCD4;
+      #india {
+        /*    fill: #00BCD4;
     opacity: .7; */
-    stroke: #101010;
-    stroke-width: .6;
-  }
+        stroke: #101010;
+        stroke-width: 0.6;
+      }
 
-  div.tooltip {
-    position: absolute;
-    text-align: center;
-    padding: 0.5em;
-    font-size: 10px;
-    color: #222;
-    background: #FFF;
-    border-radius: 2px;
-    pointer-events: none;
-    box-shadow: 0px 0px 2px 0px #a6a6a6;
-  }
+      div.tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 0.5em;
+        font-size: 10px;
+        color: #222;
+        background: #fff;
+        border-radius: 2px;
+        pointer-events: none;
+        box-shadow: 0px 0px 2px 0px #a6a6a6;
+      }
 
-  .key path {
-      display: none;
-  }
+      .key path {
+        display: none;
+      }
 
-  .key line {
-      stroke: #000;
-      shape-rendering: crispEdges;
-  }
+      .key line {
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
 
-  .key text {
-      font-size: 10px;
-  }
+      .key text {
+        font-size: 10px;
+      }
 
-  .key rect{
-    stroke-width: .4;
-  }
-
-</style>
-
-
-</head>
-<body>
-  <div class="container">
+      .key rect {
+        stroke-width: 0.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
       <nav class="teal">
         <div class="nav-wrapper">
           <!-- <a href="#" class="brand-logo right">Logo</a> -->
@@ -68,174 +65,222 @@
             <li><a href="../index.html">Parts Factory</a></li>
             <li><a href="../car_factory.html">Car Factory</a></li>
             <li><a href="../dealer.html">Dealer</a></li>
-            <li><a href="../forecasting/index.html">Forecast</a></li>
+            <li><a href="index.html">Forecast</a></li>
           </ul>
         </div>
       </nav>
-<article>
+      <article>
+        <div class="markdown">
+          #### OpenTrack Forecasts Time Series Analysis & Sales Forecasting of
+          Motor Parts
+        </div>
 
-<div class="markdown">#### OpenTrack Forecasts
-    Time Series Analysis & Sales Forecasting of Motor Parts
-</div>
+        <div class="markdown">
+          #### Plot 1 Plotting Sales Without Resampling to months or any other
+          offset.
+        </div>
+        <img src="figure-0.png" />
 
-  <div class="markdown">
-  #### Plot 1
+        <div class="markdown">
+          #### Plot 2 Plotting Sales data by Resampling to month start
+          frequency.
+        </div>
+        <img src="figure-1.png" />
 
-    Plotting Sales Without Resampling to months or any other offset.
-  </div>
-  <img src="figure-0.png" />
+        <div class="markdown">
+          #### Plot 3 Decomposing Time Series Data into Distinct Components. >
+          Observed > Trend > Seasonal > Residual
+        </div>
+        <img src="figure-2.png" />
 
-  <div class="markdown">#### Plot 2 
-    Plotting Sales data by Resampling to month start frequency.
-  </div>
-  <img src="figure-1.png" />
+        <div class="markdown">#### Plot 4 Validating Forecasts</div>
+        <img src="figure-4.png" />
 
-  <div class="markdown">#### Plot 3
-    Decomposing Time Series Data into Distinct Components.
-> Observed
+        <div class="markdown">
+          #### Plot 5 Finally Producing & Visualizing forecasts
+        </div>
+        <img src="figure-5.png" />
+        <div class="markdown">
+          #### Plot 6 State wise sales of various Motor Parts.
+        </div>
+        <div id="chart"></div>
+      </article>
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+      <script src="http://d3js.org/topojson.v1.min.js"></script>
 
-> Trend
+      <script type="text/javascript" src="d3.geo.min.js"></script>
 
-> Seasonal
+      <script type="text/javascript">
+        var w = 650;
+        var h = 650;
+        var proj = d3.geo.mercator();
+        var path = d3.geo.path().projection(proj);
+        var t = proj.translate(); // the projection's default translation
+        var s = proj.scale(); // the projection's default scale
 
-> Residual
-  </div>
-  <img src="figure-2.png" />
+        var buckets = 9,
+          colors = [
+            "#ffffd9",
+            "#edf8b1",
+            "#c7e9b4",
+            "#7fcdbb",
+            "#41b6c4",
+            "#1d91c0",
+            "#225ea8",
+            "#253494",
+            "#081d58"
+          ]; // alternatively colorbrewer.YlGnBu[9]
 
-  <div class="markdown">#### Plot 4 
-    Validating Forecasts
-  </div>
-  <img src="figure-4.png" />
+        var map = d3
+          .select("#chart")
+          .append("svg:svg")
+          .attr("width", w)
+          .attr("height", h)
+          //.call(d3.behavior.zoom().on("zoom", redraw))
+          .call(initialize);
 
-  <div class="markdown">#### Plot 5 
-    Finally Producing & Visualizing forecasts
-  </div>
-  <img src="figure-5.png" />
-  <div class="markdown">#### Plot 6
-    State wise sales of various Motor Parts.
-  </div>
-  <div id="chart"></div>
-</article>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://d3js.org/topojson.v1.min.js"></script>
+        var india = map.append("svg:g").attr("id", "india");
 
-  <script type="text/javascript" src="d3.geo.min.js"></script>
-  
-  <script type="text/javascript">
-    var w = 650;
-    var h = 650;
-    var proj = d3.geo.mercator();
-    var path = d3.geo.path().projection(proj);
-    var t = proj.translate(); // the projection's default translation
-    var s = proj.scale() // the projection's default scale
+        var div = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
 
-    var buckets = 9,
-      colors = ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"]; // alternatively colorbrewer.YlGnBu[9]
+        d3.json(
+          "https://gist.githubusercontent.com/code-monk08/ebeeb1a29e1d6c87073870c3edef5ef0/raw/fc4adb0989480c9efe194369a33b2f7d71030188/states.json",
+          function(json) {
+            var maxTotal = d3.max(json.features, function(d) {
+              return d.total;
+            });
 
-    var map = d3.select("#chart").append("svg:svg")
-      .attr("width", w)
-      .attr("height", h)
-      //.call(d3.behavior.zoom().on("zoom", redraw))
-      .call(initialize);
+            var colorScale = d3.scale
+              .quantile()
+              .domain(
+                d3.range(buckets).map(function(d) {
+                  return (d / buckets) * maxTotal;
+                })
+              )
+              .range(colors);
 
-    var india = map.append("svg:g")
-      .attr("id", "india");
+            var y = d3.scale
+              .sqrt()
+              .domain([0, 10000])
+              .range([0, 300]);
 
-    var div = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+            var yAxis = d3.svg
+              .axis()
+              .scale(y)
+              .tickValues(colorScale.domain())
+              .orient("right");
 
+            india
+              .selectAll("path")
+              .data(json.features)
+              .enter()
+              .append("path")
+              .attr("d", path)
+              .style("fill", colors[0])
+              .style("opacity", 0.5)
 
-    d3.json("https://gist.githubusercontent.com/code-monk08/ebeeb1a29e1d6c87073870c3edef5ef0/raw/fc4adb0989480c9efe194369a33b2f7d71030188/states.json", function (json) {
+              .on("click", function(d, i) {
+                d3.select(this)
+                  .transition()
+                  .duration(300)
+                  .style("opacity", 1);
+                div
+                  .transition()
+                  .duration(300)
+                  .style("opacity", 1);
+                div
+                  .text(d.id + " : " + d.total)
+                  .style("left", d3.event.pageX + "px")
+                  .style("top", d3.event.pageY - 30 + "px");
+              })
 
-      var maxTotal = d3.max(json.features, function (d) { return d.total });
+              .on("mouseleave", function(d, i) {
+                d3.select(this)
+                  .transition()
+                  .duration(300)
+                  .style("opacity", 0.5);
+                div
+                  .transition()
+                  .duration(300)
+                  .style("opacity", 0);
+              })
+              .on("mouseover", function(d, i) {
+                d3.select(this)
+                  .transition()
+                  .duration(300)
+                  .style("opacity", 0.5);
+                div
+                  .transition()
+                  .duration(300)
+                  .style("opacity", 0);
+              });
 
-      var colorScale = d3.scale.quantile()
-        .domain(d3.range(buckets).map(function (d) { return (d / buckets) * maxTotal }))
-        .range(colors);
+            india
+              .selectAll("path")
+              .transition()
+              .duration(1000)
+              .style("fill", function(d) {
+                return colorScale(d.total);
+              });
 
+            //Adding legend for our Choropleth
 
-      var y = d3.scale.sqrt()
-        .domain([0, 10000])
-        .range([0,300]);
-
-      var yAxis = d3.svg.axis()
-          .scale(y)
-          .tickValues(colorScale.domain())
-          .orient("right");
-
-
-      india.selectAll("path")
-        .data(json.features)
-        .enter().append("path")
-        .attr("d", path)
-        .style("fill", colors[0])
-        .style("opacity", 0.5)
-
-        .on('click', function (d, i) {
-          d3.select(this).transition().duration(300).style("opacity", 1);
-          div.transition().duration(300)
-            .style("opacity", 1)
-          div.text(d.id + " : " + d.total)
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 30) + "px");
-        })
-
-        .on('mouseleave', function (d, i) {
-          d3.select(this).transition().duration(300)
-            .style("opacity", 0.5);
-          div.transition().duration(300)
-            .style("opacity", 0);
-        })
-        .on('mouseover', function (d, i) {
-          d3.select(this).transition().duration(300)
-            .style("opacity", 0.5);
-          div.transition().duration(300)
-            .style("opacity", 0);
-
-        });
-
-      india.selectAll("path").transition().duration(1000)
-        .style("fill", function (d) { return colorScale(d.total); });
-
-
-
-      //Adding legend for our Choropleth
-
-     
-      var g = india.append("g")
-                .attr("class", "key")
-                .attr("transform", "translate(445, 305)")
-                .call(yAxis);
+            var g = india
+              .append("g")
+              .attr("class", "key")
+              .attr("transform", "translate(445, 305)")
+              .call(yAxis);
 
             g.selectAll("rect")
-                .data(colorScale.range().map(function(d, i) {
-                    return {
-                        y0: i ? y(colorScale.domain()[i - 1]) : y.range()[0],
-                        y1: i < colorScale.domain().length ? y(colorScale.domain()[i]) : y.range()[1],
-                        z: d
-                    };
-                }))
-                .enter().append("rect")
-                    .attr("width", 7)
-                    .attr("y", function(d) { return d.y0; })
-                    .attr("height", function(d) { return d.y1 - d.y0; })
-                    .style("fill", function(d) { return d.z; });
+              .data(
+                colorScale.range().map(function(d, i) {
+                  return {
+                    y0: i ? y(colorScale.domain()[i - 1]) : y.range()[0],
+                    y1:
+                      i < colorScale.domain().length
+                        ? y(colorScale.domain()[i])
+                        : y.range()[1],
+                    z: d
+                  };
+                })
+              )
+              .enter()
+              .append("rect")
+              .attr("width", 7)
+              .attr("y", function(d) {
+                return d.y0;
+              })
+              .attr("height", function(d) {
+                return d.y1 - d.y0;
+              })
+              .style("fill", function(d) {
+                return d.z;
+              });
+          }
+        );
 
-
-    });
-
-    function initialize() {
-      proj.scale(6700);
-      proj.translate([-1240, 720]);
-    }
-
-  </script>
-  <script src="marked.js"></script>
-  <script src="script.js"></script>
-  <script src="highlight.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]}});</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
-</div>
-</body>
+        function initialize() {
+          proj.scale(6700);
+          proj.translate([-1240, 720]);
+        }
+      </script>
+      <script src="marked.js"></script>
+      <script src="script.js"></script>
+      <script src="highlight.js"></script>
+      <script>
+        hljs.initHighlightingOnLoad();
+      </script>
+      <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]}});
+      </script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+        async
+      ></script>
+    </div>
+  </body>
 </html>

@@ -76,7 +76,7 @@ function populateCarDetails(item) {
   //Query blockchain for data to fill element
   window.pm.methods
     .products(item)
-    .call({ from: window.accounts[0] }, function(error, prod_info) {
+    .call({ from: window.accounts[1] }, function(error, prod_info) {
       if (error) console.log(error);
       else {
         console.log("Product info");
@@ -91,7 +91,7 @@ function populateCarDetails(item) {
         //Get parts too
         window.pm.methods
           .getParts(item)
-          .call({ from: window.accounts[0] }, function(error, result) {
+          .call({ from: window.accounts[1] }, function(error, result) {
             if (error) {
               console.log(error);
             } else {
@@ -105,7 +105,7 @@ function populateCarDetails(item) {
               //Check if the product is already registered, and do it otherwise
               window.co.methods
                 .currentProductOwner(item)
-                .call({ from: window.accounts[0] }, function(error, result) {
+                .call({ from: window.accounts[1] }, function(error, result) {
                   if (error) {
                     console.log(error);
                   } else {
@@ -117,7 +117,7 @@ function populateCarDetails(item) {
                       window.co.methods
                         .addOwnership(1, item)
                         .send(
-                          { from: window.accounts[0], gas: 1000000 },
+                          { from: window.accounts[1], gas: 1000000 },
                           function(error, result) {
                             if (error) {
                               console.log(error);
@@ -399,7 +399,7 @@ async function init_web3() {
     }
   ]);
 
-  window.pm.options.address = "0x11c919A730371f91610C4DFB6761C89Fe75D7803";
+  window.pm.options.address = "0x38f1b2f36F6144bAB88AEAc327f551EFc0d8cC58";
   window.co = new web3.eth.Contract([
     {
       constant: true,
@@ -544,7 +544,7 @@ async function init_web3() {
       signature: "0xac814490"
     }
   ]);
-  window.co.options.address = "0x2C43f0F083Cb6cEe906E1670756BF15236AA3E31";
+  window.co.options.address = "0x11c919A730371f91610C4DFB6761C89Fe75D7803";
 }
 
 async function getOwnerHistoryFromEvents(event, p_hash) {
